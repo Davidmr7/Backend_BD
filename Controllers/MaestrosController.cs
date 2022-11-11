@@ -22,11 +22,11 @@ namespace Backend_BD.Controllers
 
 
 
-        public ActionResult Details(int? matricula)
+        public ActionResult Details(int? id)
         {
             using (AlumnoDbContext dbMaestros = new AlumnoDbContext())
             {
-                Maestros maestro = dbMaestros.Maestros.Find(matricula);
+                Maestros maestro = dbMaestros.Maestros.Find(id);
                 if (maestro == null)
                 {
                     return HttpNotFound();
@@ -52,11 +52,11 @@ namespace Backend_BD.Controllers
         }
 
 
-        public ActionResult Edit(int? matricula)
+        public ActionResult Edit(int? id)
         {
             using (AlumnoDbContext dbMaestros = new AlumnoDbContext())
             {
-                return View(dbMaestros.Maestros.Where(x => x.Matricula == matricula).FirstOrDefault());
+                return View(dbMaestros.Maestros.Where(x => x.Matricula == id).FirstOrDefault());
             }
         }
         [HttpPost]
@@ -69,22 +69,22 @@ namespace Backend_BD.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Delete(int? matricula)
+        public ActionResult Delete(int? id)
         {
             using (AlumnoDbContext dbMaestros = new AlumnoDbContext())
             {
-                return View(dbMaestros.Maestros.Where(x => x.Matricula == matricula).FirstOrDefault());
+                return View(dbMaestros.Maestros.Where(x => x.Matricula == id).FirstOrDefault());
 
             }
         }
 
         [HttpPost]
 
-        public ActionResult Delete(Alumnos maes, int? matricula)
+        public ActionResult Delete(Alumnos maes, int? id)
         {
             using (AlumnoDbContext dbMaestros = new AlumnoDbContext())
             {
-                Maestros ma = dbMaestros.Maestros.Where(x => x.Matricula == matricula).FirstOrDefault();
+                Maestros ma = dbMaestros.Maestros.Where(x => x.Matricula == id).FirstOrDefault();
                 dbMaestros.Maestros.Remove(ma);
                 dbMaestros.SaveChanges();
             }
